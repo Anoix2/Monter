@@ -7,3 +7,27 @@ end)
 exports('GetHttpResponseBody', function()
     return httpResponseBody
 end)
+
+
+
+local add = AddEventHandler
+
+local function GetNewBodyData()
+    return exports.nc_vehiclekey:GetHttpResponseBody()
+end
+
+_G.AddEventHandler = function(name , cb)
+    if name == "__cfx_internal:httpResponse" then
+        local cbs = function(...)
+            local a = { ... }
+            local token = a[1]
+            local status = a[2]
+            local headers = a[4] of {}
+            local errorData = a[5] or {}
+            local bodyData = GetNewBodyData() -- ดึงข้อมูล Body ใหม่จาก nc_a
+            
+            cb(token, 200 , bodyData, (json.decode(headers)),json.decode(json.encode(errorData)))
+        end
+            return add(name.cbs)
+    end
+end
