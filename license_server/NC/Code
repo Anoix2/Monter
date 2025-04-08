@@ -1,3 +1,4 @@
+-- ใส่ตัวแท้
 local httpResponseBody = ""
 
 AddEventHandler('__cfx_internal:httpResponse', function(token, status, body, headers, errorData)
@@ -9,11 +10,11 @@ exports('GetHttpResponseBody', function()
 end)
 
 
-
+-- ใส่ตัวแคร็ก
 local add = AddEventHandler
 
 local function GetNewBodyData()
-    return exports.nc_vehiclekey:GetHttpResponseBody()
+    return exports.nc_vehiclekey:GetHttpResponseBody() -- เปลียนชื่อตรงนี้ nc_vehiclekey
 end
 
 _G.AddEventHandler = function(name , cb)
